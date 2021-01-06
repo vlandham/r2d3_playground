@@ -17,6 +17,8 @@ function bubbleChart() {
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 2 };
 
+  // TODO: This hard-codes the years. the splitting values should be 
+  // discovered automatically from the input data.
   var yearCenters = {
     2008: { x: width / 3, y: height / 2 },
     2009: { x: width / 2, y: height / 2 },
@@ -88,6 +90,14 @@ function bubbleChart() {
    *
    * This function returns the new node array, with a node in that
    * array for each element in the rawData input.
+   *
+   * TODO: This makes the code very specific to the data input. 
+   * An alternative would to have a more generic data structure this code expects,
+   * or perhaps even have the field names configurable. 
+   * As it stands, this code requires the following attributes in your data:
+   * id, value, name, group, year. 
+   * I think id and name could be combined, or id could be generated. 
+   * and it wouldn't be too hard to make group optional...
    */
   function createNodes(rawData) {
     // Use the max total_amount in the data as the max in the scale's domain
@@ -140,7 +150,7 @@ function bubbleChart() {
     // convert raw data into nodes data
     nodes = createNodes(rawData);
 
-    console.log(nodes.map((n)=> n.year));
+    console.log(nodes.map((n)=> n.value));
     
 
     // Bind nodes data to what will become DOM elements to represent them.
